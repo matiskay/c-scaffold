@@ -24,6 +24,30 @@ touch "${PROJECT_NAME}".h
 touch minunit.h
 touch test_${PROJECT_NAME}.c
 touch Makefile
+touch README.mkd 
+
+echo "
+# ${PROJECT_NAME}
+
+# How to compile
+make run
+
+# How to run test
+make test
+# How to debug the program
+gcc -g name_of_file.c -o name_of_file
+gdb name_of_file
+
+## How to start the Program
+break main
+run # Execute the program
+next # Next Line
+print &i # Print the address of the variable
+print sizeof(int) # Print sizeof the int type
+x/4xb &i # Get the raw bytes of i. I want to examinate 4 values formatted as hex numerals. byte by byte
+ptype i # Tell me the type of c expression
+x/12xb &a # a is an array
+" > README.mkd
 
 echo "#include <stdlib.h>
 #include <stdio.h>
