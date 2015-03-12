@@ -29,7 +29,7 @@ echo "#include <stdlib.h>
 #include <stdio.h>
 #include \"${PROJECT_NAME}.h\"
 
-int main() {
+int main(int argc, char **argv) {
   /* Start your code here */
   printf(\"Hello from ${PROJECT_NAME}\\n\");
 }" > ${PROJECT_NAME}.c
@@ -68,6 +68,8 @@ echo "#include \"${PROJECT_NAME}.h\"" > test_${PROJECT_NAME}.c
 {
   echo '#include <stdio.h>'
   echo '#include "minunit.h"'
+  echo "include \"${PROJECT_NAME}.h\""
+  echo ""
   echo '#define KNRM  "\x1B[0m"'
   echo '#define KRED  "\x1B[31m"'
   echo '#define KGRN  "\x1B[32m"'
@@ -77,19 +79,22 @@ echo "#include \"${PROJECT_NAME}.h\"" > test_${PROJECT_NAME}.c
   echo '#define KCYN  "\x1B[36m"'
   echo '#define KWHT  "\x1B[37m"'
   echo '#define RESET "\033[0m"'
-
+  echo ""
   echo 'int tests_run = 0;'
 
+  echo ""
   echo 'static char * test_unit() {'
   echo '  mu_assert("error, test_unit 1 != 1", 1 == 1);'
   echo '  return 0;'
   echo '}'
 
+  echo ""
   echo 'static char * all_tests() {'
   echo '  mu_run_test(test_unit);'
   echo '  return 0;'
   echo '}'
 
+  echo ""
   echo 'int main(int argc, char **argv) {'
   echo '  char *result = all_tests();'
   echo '  if (result != 0) {'
@@ -107,7 +112,7 @@ echo "#include \"${PROJECT_NAME}.h\"" > test_${PROJECT_NAME}.c
   echo '    printf(KGRN " ✓ ALL TESTS PASSED \n" RESET);'
   echo '  }'
   echo '  printf("Tests run: %d\n", tests_run);'
-  echo 'return result != 0;'
+  echo '  return result != 0;'
   echo '}'
 
 } > test_${PROJECT_NAME}.c
