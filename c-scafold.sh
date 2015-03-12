@@ -65,20 +65,21 @@ echo "#include \"${PROJECT_NAME}.h\"" > test_${PROJECT_NAME}.c
   # Make command complains about spaces :(
   # fix: http://stackoverflow.com/questions/525872/echo-tab-characters-in-bash-script
   # http://stackoverflow.com/questions/525872/echo-tab-characters-in-bash-script
-  echo -e "\t gcc ${PROJECT_NAME}.c"
+  echo -e "\t gcc ${PROJECT_NAME}.c -o test_${PROJECT_NAME}.out"
 
   echo "test:"
-  echo -e "\t gcc test_${PROJECT_NAME}.c"
-  echo -e "\t ./a.out"
+  echo -e "\t gcc test_${PROJECT_NAME}.c -o test_${PROJECT_NAME}.out"
+  echo -e "\t ./test_${PROJECT_NAME}.out"
   echo ""
 
   echo "clean:"
-  echo -e "\t rm a.out"
+  echo -e "\t rm *.out"
   echo ""
 
   echo "run:"
-  echo -e "\t gcc ${PROJECT_NAME}.c"
-  echo -e "\t ./a.out"
+  echo -e "\t gcc ${PROJECT_NAME}.c -o ${PROJECT_NAME}.out"
+  echo -e "\t ./${PROJECT_NAME}.out"
+
 } > Makefile
 
 {
@@ -92,7 +93,7 @@ echo "#include \"${PROJECT_NAME}.h\"" > test_${PROJECT_NAME}.c
 {
   echo '#include <stdio.h>'
   echo '#include "minunit.h"'
-  echo "include \"${PROJECT_NAME}.h\""
+  echo "#include \"${PROJECT_NAME}.h\""
   echo ""
   echo '#define KNRM  "\x1B[0m"'
   echo '#define KRED  "\x1B[31m"'
