@@ -1,6 +1,10 @@
 #!/bin/bash
 
 # Scafold for a basic c program
+# TODO: Add a program with a module. The module itself has
+# to have a test and the program as well.
+# TODO: bash c-scafold <program-name> <module-name>
+# TODO: Find a good image for building the project
 
 PROJECT_NAME=$1
 CURRENT_DIRECTORY=$(pwd)
@@ -34,6 +38,7 @@ make run
 
 # How to run test
 make test
+
 # How to debug the program
 gcc -g name_of_file.c -o name_of_file
 gdb name_of_file
@@ -47,6 +52,14 @@ print sizeof(int) # Print sizeof the int type
 x/4xb &i # Get the raw bytes of i. I want to examinate 4 values formatted as hex numerals. byte by byte
 ptype i # Tell me the type of c expression
 x/12xb &a # a is an array
+
+# Linking stuff and generating the program
+
+If you have modules you have to compile one by one
+gcc -c module1.c # This command generates module1.o
+gcc -c program-that-depends-of-module1.c
+gcc -o program.out module1.o program-that-depends-of-module1.o
+./program.out
 " > README.mkd
 
 echo "#include <stdlib.h>
