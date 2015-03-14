@@ -69,6 +69,7 @@ echo "#include <stdlib.h>
 int main(int argc, char **argv) {
   /* Start your code here */
   printf(\"Hello from ${PROJECT_NAME}\\n\");
+  return 0;
 }" > ${PROJECT_NAME}.c
 
 echo "#include \"${PROJECT_NAME}.h\"" > test_${PROJECT_NAME}.c
