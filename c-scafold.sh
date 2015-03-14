@@ -28,6 +28,7 @@ touch "${PROJECT_NAME}".h
 touch minunit.h
 touch test_${PROJECT_NAME}.c
 touch Makefile
+touch main.c
 touch README.mkd 
 
 echo "
@@ -65,12 +66,18 @@ gcc -o program.out module1.o program-that-depends-of-module1.o
 echo "#include <stdlib.h>
 #include <stdio.h>
 #include \"${PROJECT_NAME}.h\"
+" > ${PROJECT_NAME}.c
+
+echo "#include <stdlib.h>
+#include <stdio.h>
+
+/* Add function signatures here */
 
 int main(int argc, char **argv) {
   /* Start your code here */
-  printf(\"Hello from ${PROJECT_NAME}\\n\");
+  printf(\"Hello from main\\n\");
   return 0;
-}" > ${PROJECT_NAME}.c
+}" > main.c
 
 echo "#include \"${PROJECT_NAME}.h\"" > test_${PROJECT_NAME}.c
 
@@ -91,8 +98,10 @@ echo "#include \"${PROJECT_NAME}.h\"" > test_${PROJECT_NAME}.c
   echo ""
 
   echo "run:"
-  echo -e "\t gcc ${PROJECT_NAME}.c -o ${PROJECT_NAME}.out"
-  echo -e "\t ./${PROJECT_NAME}.out"
+  echo -e "\t gcc -c ${PROJECT_NAME}.c"
+  echo -e "\t gcc -c main.c"
+  echo -e "\t gcc -o main ${PROJECT_NAME}.o main.o"
+  echo -e "\t ./main"
 
 } > Makefile
 
